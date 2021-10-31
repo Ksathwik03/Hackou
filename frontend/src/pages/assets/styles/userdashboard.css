@@ -1,0 +1,346 @@
+.dashboard-main {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #63a4ff;
+    padding: 110px 0 10px 0;
+    background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.user-name {
+    background-color: #637081;
+    background-image: linear-gradient(315deg, #637081 0%, #7c98b3 74%);
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow-text-simple-animation-rev 0.75s ease forwards;
+}
+
+.user-name:hover {
+    animation: rainbow-text-simple-animation 0.5s ease-in forwards;
+}
+
+@keyframes rainbow-text-simple-animation-rev {
+    0% {
+        background-size: 650%;
+    }
+    40% {
+        background-size: 650%;
+    }
+    100% {
+        background-size: 100%;
+    }
+}
+
+@keyframes rainbow-text-simple-animation {
+    0% {
+        background-size: 100%;
+    }
+    80% {
+        background-size: 650%;
+    }
+    100% {
+        background-size: 650%;
+    }
+}
+
+.dashboard-main h1 {
+    font-family: "Archivo Black", sans-serif;
+    font-weight: normal;
+    font-size: 5rem;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.userData {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 6px 2px rgb(60, 64, 67, 0.15);
+    border-radius: 4px;
+    padding: 20px 5px;
+}
+
+.filter {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 30px 0;
+    padding: 5px 10px;
+}
+
+.filter input[type="text"] {
+    width: 75%;
+    outline: none;
+    box-sizing: content-box;
+    border: 1px solid black;
+    font-size: 16px;
+    padding: 10px;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    border: 2px solid white;
+}
+
+.filter button {
+    width: 25%;
+    background: none;
+    font-size: 16px;
+    padding: 4px 8px;
+    border: none;
+    outline: none;
+    background-color: #00589f;
+    cursor: pointer;
+    /* background-color: rgb(0, 0, 0); */
+    color: white;
+    border-radius: 0 10px 10px 0;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.filter button:hover {
+    box-shadow: 0 2px 6px 2px rgb(60, 64, 67, 0.15);
+}
+
+.requests {
+    width: 100%;
+    color: white !important;
+    transition: all 1s;
+}
+
+.request {
+    /* border: 2px solid rgb(187, 187, 187); */
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    padding: 10px 12px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2169a3;
+}
+
+.req-detail {
+    width: 60%;
+}
+
+.req-detail h2 {
+    font-size: 30px;
+    margin: 2px 0px 10px 0px;
+}
+
+.req-detail p {
+    font-size: 14px;
+}
+
+.req-detail span {
+    margin: 5px;
+    color: white;
+    border-radius: 6px;
+    padding: 2px;
+    font-family: monospace;
+}
+
+.success {
+    background-color: #007bff;
+}
+
+.fail {
+    background-color: #dc3545;
+}
+
+.request button {
+    border: none;
+    outline: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.request .chat {
+    font-size: 16px;
+    /* color: white; */
+    padding: 2px 8px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+    font-weight: bolder;
+    border-radius: 4px;
+}
+
+.request .chat:hover {
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.request .chat svg {
+    position: relative;
+    top: 2px;
+}
+
+.request .icon {
+    font-size: 24px;
+    margin: 0px 10px;
+}
+
+.mkblr {
+    filter: blur(3px);
+}
+
+.prod-details {
+    max-width: 700px;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 6px 2px rgb(60, 64, 67, 0.15);
+    border-radius: 4px;
+    padding: 40px 20px;
+    padding-bottom: 20px;
+}
+
+.prod-details h1 {
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.prod-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.prod-details h3 {
+    margin: 12px 0px;
+}
+
+.prod-details h3 span {
+    color: white;
+    font-family: monospace;
+    padding: 4px;
+    border-radius: 2px;
+}
+
+.prod-details button {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 16px 0px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 4px 12px;
+}
+
+.requestForm {
+    max-width: 600px;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 6px 2px rgb(60, 64, 67, 0.15);
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.requestForm button {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.form-head {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.form-head button {
+    font-size: 24px;
+}
+
+.requestForm .field {
+    font-size: 16px;
+    margin: 10px 0px;
+}
+
+.field input[type="text"] {
+    width: 40%;
+    outline: none;
+    box-sizing: content-box;
+    border: 1px solid black;
+    font-size: 16px;
+    padding: 2px 8px;
+}
+
+.field select {
+    width: 40%;
+    outline: none;
+    box-sizing: content-box;
+    border: 1px solid black;
+    font-size: 16px;
+    padding: 2px 8px;
+}
+
+.field label {
+    font-weight: 600;
+    margin: 0px 15px 0px 0px;
+}
+
+button[type="submit"] {
+    background-color: #343a40;
+    color: white;
+    font-size: large;
+    padding: 4px 12px;
+    font-weight: bold;
+    margin: 20px 0px;
+    border-radius: 4px;
+}
+
+.dashboard-box {
+    width: 50vw;
+}
+
+@media (max-width:1100px) {
+    .dashboard-box {
+        width: 70vw;
+    }
+}
+
+@media (max-width:700px) {
+    .dashboard-box {
+        width: 85vw;
+    }
+    .dashboard-main h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width:500px) {
+    .dashboard-box {
+        width: 98vw;
+    }
+    .filter input[type="text"] {
+        width: 60%;
+    }
+    .filter button {
+        width: 40%;
+    }
+}
