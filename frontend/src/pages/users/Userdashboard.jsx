@@ -108,7 +108,7 @@ function Userdashboard({ match }) {
   if (loading) {
     return (
       <div>
-        loading
+        <h1 className="loading">Loading...</h1>
       </div>
     )
   }
@@ -204,9 +204,9 @@ function Userdashboard({ match }) {
             <input type="text" name="link" placeholder="product link"
               onChange={(e) => { setproductLink(e.target.value) }}
               required />
-            <button onClick={getdetails}>Get Details</button>
+            {/* <button onClick={getdetails}>Continue</button> */}
           </div>
-          {
+          {/* {
             showpro &&
             <div className="prodet">
               <div className="desc">
@@ -218,7 +218,7 @@ function Userdashboard({ match }) {
               <p><h4 style={{display:"inline"}}>price : </h4><span>{prodDet.price}</span></p>
               <p><h4 style={{display:"inline"}}>category : </h4><span>{prodDet.category}</span></p>
             </div>
-          }
+          } */}
           <div className="field">
             <label htmlFor="bank">Bank</label>
             <select name="bank">
@@ -227,7 +227,7 @@ function Userdashboard({ match }) {
               <option value="AXIS">AXIS</option>
             </select>
           </div>
-          <button type="submit" onClick={postProduct} >submit</button>
+          <button onClick={postProduct} >Continue</button>
         </div>
       }
       {showDetails && (

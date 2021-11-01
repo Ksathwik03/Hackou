@@ -117,6 +117,16 @@
     transition: all 1s;
 }
 
+.loading {
+    font-size: 50px;
+    font-family: monospace;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .request {
     /* border: 2px solid rgb(187, 187, 187); */
     box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
