@@ -33,11 +33,12 @@ function Userdashboard({ match }) {
   if (localStorage.getItem("username") == "admin") {
     admin = true
   }
-  const getdetails = (e) => {
-    e.preventDefault()
-    axios.get(productLink).then(res => setprodDet(res.data))
+  const getdetails = () => {
+    setshowRequestForm(false)
+    // setloading(true)
+    // await fetch(productLink).then(res => setprodDet(res.data))
+    // axios.get(productLink).then((res) => {setprodDet(res.data);setloading(false);setshowpro(true)})
     setshowpro(true)
-    
   }
 
   const filterFucntion = ({ product_name }) => {
@@ -85,7 +86,6 @@ function Userdashboard({ match }) {
           toast("Some error occured")
         }
       })
-    setshowRequestForm(false)
     setblur(false)
     setprodDet({});
     setshowpro(false)
@@ -146,12 +146,12 @@ function Userdashboard({ match }) {
                 <div className="request" key={request.id}>
                   <div className="req-detail">
                     <h2>{request.product_name}</h2>
-                    <p className="status">
-                      status :{" "}
+                    <span className="status border">
+                    {" "}% payment done :{" "}
                       <span className={request.dealStatus ? "success" : "fail"}>
-                        {request.dealStatus ? "Accepted" : "Pending"}
+                        {request.dealStatus ? "100%" : "30%"}
                       </span>
-                    </p>
+                    </span>
                   </div>
                   {request.dealStatus && <button
                     className="chat"
@@ -204,30 +204,17 @@ function Userdashboard({ match }) {
             <input type="text" name="link" placeholder="product link"
               onChange={(e) => { setproductLink(e.target.value) }}
               required />
-            {/* <button onClick={getdetails}>Continue</button> */}
           </div>
-          {/* {
-            showpro &&
-            <div className="prodet">
-              <div className="desc">
 
-              <img src={prodDet.image} height="auto" width="100vw" alt="product image" />
-              <p><h4 style={{display:"inline"}}>Description : </h4>{prodDet.description}</p>
-              </div>
-              <p><h4 style={{display:"inline"}}>product name : </h4><span>{prodDet.title}</span></p>
-              <p><h4 style={{display:"inline"}}>price : </h4><span>{prodDet.price}</span></p>
-              <p><h4 style={{display:"inline"}}>category : </h4><span>{prodDet.category}</span></p>
-            </div>
-          } */}
           <div className="field">
             <label htmlFor="bank">Bank</label>
-            <select name="bank">
+            <select name="bank" onChange={(e) => setbank(e.target.value)}>
               <option value="ICICI">ICICI</option>
               <option value="SBI">SBI</option>
               <option value="AXIS">AXIS</option>
             </select>
           </div>
-          <button onClick={postProduct} >Continue</button>
+          <button onClick={getdetails} >Continue</button>
         </div>
       }
       {showDetails && (
@@ -242,9 +229,9 @@ function Userdashboard({ match }) {
               </a>
             </h3>
             <h3>
-              Status :{" "}
-              <span className={prodDetails.status ? "success" : "fail"}>
-                {prodDetails.status ? "Accepted" : "Pending..."}
+              % payment done :{" "}
+              <span className={prodDetails.dealStatus ? "success" : "fail"}>
+                {prodDetails.dealStatus ? "100%" : "30%"}
               </span>
             </h3>
           </div>
@@ -258,6 +245,24 @@ function Userdashboard({ match }) {
           </button>
         </div>
       )}
+      {
+          showpro &&
+          <div className="prodet">
+            <div className="form-head">
+              <h1>PAYMENT GATEWAY</h1>
+              {/* <button onClick={() => { setshowpro(false); setblur(!blur);setprodDet({})}}><ImCross /></button> */}
+            </div>
+            {/* <div className="img">
+            <img src={prodDet.image} height="auto" width="30%" alt="product image" />
+            </div>
+            <p><h4 style={{display:"inline"}}>Product : </h4><span>{prodDet.title}</span></p>
+            <p><h4 style={{display:"inline"}}>Description : </h4>{prodDet.description}</p>
+            <p><h4 style={{display:"inline"}}>price : </h4><span>${prodDet.price}</span></p>
+            <p><h4 style={{display:"inline"}}>category : </h4><span>{prodDet.category}</span></p> */}
+
+            <button>PAY</button>
+          </div>
+          } 
       <ToastContainer />
     </>
   );
