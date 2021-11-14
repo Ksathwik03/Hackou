@@ -4,7 +4,7 @@ const crypto = require("crypto");
 
 exports.addProduct = async(req,res) => {
     try{
-        const token = req.headers["x-access-token"];
+        const token = req.body.token;
         const {product_name,product_link,bank} = req.body
         const user = await User.findOne({'token': token})
         if(!user){
@@ -45,7 +45,7 @@ exports.addProduct = async(req,res) => {
 
 exports.updateProductStatus = async(req,res) => {
     try{
-        const token = req.headers["x-access-token"];
+        const token = req.body.token;
         const {dealStatus} = req.body
         const user = await User.findOne({'token': token})
         if(!user || !(user.admin)){
@@ -75,8 +75,9 @@ exports.updateProductStatus = async(req,res) => {
 
 exports.getUserProducts = async(req,res) => {
     try{
-        const token = req.headers["x-access-token"];
+        const token = req.body.token;
         const user = await User.findOne({'token': token})
+        console.log(user)
         if(!user){
             return res.json({
                 stats: 400,
@@ -84,11 +85,10 @@ exports.getUserProducts = async(req,res) => {
                 message: "Auth token required"
             })
         }
-        console.log(user)
+        // console.log(user)
         const id = user._id
         let products
         if(user.admin == true){
-            console.log(2)
             products = await Product.find({})
         }
         else{
