@@ -7,9 +7,9 @@ const validPassword = require("../utils/passwordUtils").validPassword;
 const {sendEmail} = require("./emailController")
 const {secureId} = require('../utils/emailUtils')
 const {addIp} = require("../utils/DDOS")
-
 const requestIp = require('request-ip');
- 
+const crypto = require("crypto");
+
 exports.ipMiddleware = function(req, res, next) {
     const clientIp = requestIp.getClientIp(req); 
     if(!addIp(clientIp)){
@@ -138,7 +138,6 @@ exports.verifyOnlyCustomers = async(req,res,next)=>{
 
 
 exports.addProfile = async (req, res, next) => {
-  console.log(req.body)
   try {
     const {username,email,password} = req.body
 
@@ -159,13 +158,14 @@ exports.addProfile = async (req, res, next) => {
     // //     throw new Error("Email is invalid");
     // //   }
     // // }
-
+    const token = crypto.randomBytes(64).toString('hex');
     const newUser = new User({
       username: username,
       hash: hash,
       salt: salt,
       email: email,
       verificationToken: secureToken,
+      token: token
     });
 
     const link = `http://localhost:8000/verifyEmail/${username}/${secureToken}`
@@ -176,7 +176,6 @@ exports.addProfile = async (req, res, next) => {
     //sendEmail(link,email,username,'Verify email')
     
     await newUser.save();
-    const token = await newUser.generateAuthToken()
     return res.status(201).json({
       success: true,
       data: newUser,
@@ -221,9 +220,8 @@ exports.login = async (req, res, next) => {
     // }
   
       if (user && (await validPassword(password,user.hash, user.salt))) {
-          const token = await user.generateAuthToken();
-          await user.save();
-  
+          const token = user.token;
+          
         return res.status(200).json({
           success: true,
           data:user,

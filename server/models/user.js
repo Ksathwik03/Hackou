@@ -23,11 +23,7 @@ const UserSchema = new mongoose.Schema({
     type:Boolean
   },
   
-  tokens: [{
-    token:{
-        type:String,
-    }
-  }],
+  token: {type: String},
   admin: {
     default: false,
     type: Boolean

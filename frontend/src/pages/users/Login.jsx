@@ -33,6 +33,7 @@ function Admin() {
     }
     await axios.post(`${api}login`, body)
     .then((res) => {
+      console.log(res.data)
       if(res.status === 200){
         toast("Successfull logged in")
         localStorage.setItem("token", res.data.token)

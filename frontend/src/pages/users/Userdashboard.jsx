@@ -8,6 +8,7 @@ import "../assets/styles/userdashboard.css";
 import axios from 'axios'
 import { api } from '../../Api/api'
 import { toast, ToastContainer } from 'react-toastify'
+import StripeCheckout from 'react-stripe-checkout'
 
 function Userdashboard({ match }) {
   const [user_data, setuser_data] = useState({
@@ -29,6 +30,8 @@ function Userdashboard({ match }) {
   const history = useHistory()
   const [prodDet, setprodDet] = useState({})
   const [showpro, setshowpro] = useState(false)
+  const [price, setprice] = useState(2000)
+
   let admin = false
   if (localStorage.getItem("username") == "admin") {
     admin = true
@@ -54,8 +57,8 @@ function Userdashboard({ match }) {
 
   useEffect(async () => {
     setloading(true)
-    const headers = { "x-access-token": localStorage.getItem("token") || null }
-    await axios.get(`${api}product/user`, headers)
+    const headers = { "token": localStorage.getItem("token") || null }
+    await axios.post(`${api}product/user`, headers)
       .then((res) => {
         if (res.status == 200) {
           console.log(res)
@@ -71,12 +74,16 @@ function Userdashboard({ match }) {
       })
   }, [update])
 
+  // function tokenHandler(token){
+  //   console.log(token)
+  //   postProduct()
+  // }
+
   const postProduct = async (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     setloading(true)
-    const headers = { "x-access-token": localStorage.getItem("token") || null }
-    const body = { product_name: productName, product_link: productLink, bank: bank }
-    await axios.post(`${api}product/add`, body, headers)
+    const body = { product_name: productName, product_link: productLink, bank: bank ,"token": localStorage.getItem("token") || null }
+    await axios.post(`${api}product/add`, body)
       .then((res) => {
         console.log(res)
         if (res.status == 200) {
@@ -153,12 +160,12 @@ function Userdashboard({ match }) {
                       </span>
                     </span>
                   </div>
-                  {request.dealStatus && <button
+                  <button
                     className="chat"
                     onClick={() => history.push(`/${match.params.userId}/dashboard/${request.chat_id}`)}
                   >
                     Chat{"   "} <BiRightArrow />
-                  </button>}
+                  </button>
                   {admin && !request.dealStatus &&
                     <div >
                       <button
@@ -260,7 +267,15 @@ function Userdashboard({ match }) {
             <p><h4 style={{display:"inline"}}>price : </h4><span>${prodDet.price}</span></p>
             <p><h4 style={{display:"inline"}}>category : </h4><span>{prodDet.category}</span></p> */}
 
-            <button>PAY</button>
+            <StripeCheckout
+            token = {postProduct}
+            amount = {price *100}
+            currency = 'INR'
+            stripeKey = 'pk_test_51JMFbSSB989OYEdn4pm6dEloaMJGGFv9K5g8MN5clOzJRZBDarNSHoPcFSvcjXGxeEEBJhD0PpSVmFrKKlTxdTT300hIUzLE0d'
+            >
+
+
+            </StripeCheckout>
           </div>
           } 
       <ToastContainer />
