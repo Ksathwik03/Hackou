@@ -138,7 +138,7 @@ exports.getAllProducts = async(req,res) => {
 
 exports.getChat = async(req,res) => {
     try{
-        const token = req.headers["x-access-token"];
+        const token = req.body.token;
         const user = await User.findOne({'token': token})
         if(!user ){
             return res.json({
