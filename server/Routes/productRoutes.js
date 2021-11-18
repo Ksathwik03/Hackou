@@ -8,5 +8,5 @@ router.post('/add', addProduct)
 router.put('/update/:pid',updateProductStatus)
 router.post('/user',getUserProducts)
 router.get('/',getAllProducts)
-router.get('/:cid',getChat)
+router.post('/:cid',getChat)
 module.exports = router;

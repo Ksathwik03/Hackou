@@ -18,8 +18,8 @@ function Chat({match}) {
     }
 
     useEffect(async() => {
-        const headers = {"x-access-token": localStorage.getItem("token") || null}
-        await axios.get(`${api}product/${match.params.chatId}`,headers)
+        const body = {"token": localStorage.getItem("token") || null}
+        await axios.post(`${api}product/${match.params.chatId}`,body)
         .then((res) => {
             if(res.status == 200){
             setrequest(res.data.products[0])
